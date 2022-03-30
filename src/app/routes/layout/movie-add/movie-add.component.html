@@ -1,1 +1,41 @@
-<p>movie-add works!</p>
+<div class="d-flex p-5">
+    <div>
+        <input [(ngModel)]="searchKeyword" [typeahead]="suggestions" typeaheadOptionField="Title"
+            [typeaheadAsync]="true" class="form-control" placeholder="Ara" autocomplete="off" name="search"
+            [typeaheadItemTemplate]="customItemTemplate" [typeaheadScrollable]="true"
+            [typeaheadOptionsInScrollableView]="10" [typeaheadLatinize]="true" #typeahead="bs-typeahead"
+            (typeaheadOnSelect)="selectMovie($event)" (ngModelChange)="setSearchKeyword($event)"
+            (typeaheadOnBlur)="closeOptions()">
+        <ng-template #customItemTemplate let-model="item">
+            <div class="d-flex align-items-center w-100">
+                <div>
+                    <img [src]="model.Poster" width="50">
+                </div>
+                <div class="content-overflow">
+                    {{ model.Title }}
+                </div>
+            </div>
+        </ng-template>
+    </div>
+    <div class="d-flex flex-column border p-3 rounded">
+        <p>Film Ekle</p>
+        <form class="form-group" [formGroup]="form" (submit)="submit()">
+            <div class="input-group">
+                <label for="title">Adı: </label>
+                <input class="ml-2 form-control" type="text" id="title" formControlName="title">
+            </div>
+            <div class="input-group mt-2">
+                <label for="poster">Görseli: </label>
+                <input class="ml-2 form-control" type="text" id="poster" formControlName="poster">
+            </div>
+            <div class="input-group mt-2">
+                <label for="Score">Puanı: </label>
+                <input class="ml-2 form-control" type="text" id="score" formControlName="score">
+            </div>
+            <div class="d-flex justify-content-end mt-2">
+                <button class="btn btn-primary" [disabled]="!selectedMovie" type="submit">Kaydet</button>
+            </div>
+        </form>
+    </div>
+
+</div>

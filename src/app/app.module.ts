@@ -8,6 +8,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { LoginComponent } from '@routes/login/login.component';
 import { LayoutModule } from '@routes/layout/layout.module';
 import { SharedModule } from '@shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
+import { MovieService } from './services/movie.service';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,7 @@ import { SharedModule } from '@shared/shared.module';
     LoginComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -22,7 +25,7 @@ import { SharedModule } from '@shared/shared.module';
     LayoutModule,
     SharedModule
   ],
-  providers: [],
+  providers: [MovieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
