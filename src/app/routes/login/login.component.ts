@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '@model/user.model';
 import { AuthService } from 'app/services/auth.service';
+import * as md5 from 'md5';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    const user = new User(this.form.value.username, this.form.value.password);
+    const user = new User(this.form.value.username, md5(this.form.value.password));
     this.authService.login(user);
   }
 

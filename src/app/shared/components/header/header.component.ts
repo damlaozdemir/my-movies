@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '@model/user.model';
-import { ConfirmationModalComponent } from '@shared/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
 import { AuthService } from 'app/services/auth.service';
 import { UserService } from 'app/services/user.service';
 import { ToastrService } from 'ngx-toastr';

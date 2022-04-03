@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from '@model/movie.model';
-import { ConfirmationModalComponent } from '@shared/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
 import { MovieService } from 'app/services/movie.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./movie-list.component.sass']
 })
 export class MovieListComponent implements OnInit {
+  searchText: string = '';
   count: number = 10;
   selectedMovie: Movie;
   movies: Movie[] = [];
@@ -65,10 +66,6 @@ export class MovieListComponent implements OnInit {
         break;
       default:
     }
-  }
-
-  onKeyUpEvent(event: any) {
-    this.movies = this.movies.filter(movie => { movie.Title.includes(event.target.value) });
   }
 
   onScrollDown() {
