@@ -1,4 +1,15 @@
-<nav class="navbar navbar-dark bg-dark justify-content-between">
-    <a class="navbar-brand">IMDB</a>
-    <button class="btn btn-primary" (click)="router.navigate(['/add']);">Film ekle</button>
+<nav class="navbar fixed-top navbar-light bg-light justify-content-between">
+    <div class="flex-grow-1">
+        <img class="logo" (click)="router.navigate(['/list'])" src="assets/images/logo.png" alt="My Movies" />
+    </div>
+    <div *ngIf="user">
+        <span>Hoşgeldin, {{user.username}} </span>
+        <button class="btn btn-secondary ml-3" (click)="openConfirmationModal()">Hesabı Sil</button>
+        <button class="btn btn-primary ml-3" (click)="router.navigate(['/add']);">Film ekle</button>
+        <button class="btn btn-secondary ml-3" (click)="logout()">Çıkış Yap</button>
+    </div>
 </nav>
+<app-confirmation-modal (success)="deleteAccount()" [modalTitleText]="'Hesabı Sil'"
+    [modalBodyTextContent]="'Hesabınızı silmek istediğinize emin misiniz?'" [modalAcceptText]="'Sil'"
+    [modalDeclineText]="'Vazgeç'">
+</app-confirmation-modal>

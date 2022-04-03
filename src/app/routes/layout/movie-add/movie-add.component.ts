@@ -1,38 +1,30 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Movie } from '@model/movie.model';
 import { MovieService } from 'app/services/movie.service';
 import { TypeaheadDirective, TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, Observer, noop, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie-add',
-  templateUrl: './movie-add.component.html',
-  styleUrls: ['./movie-add.component.sass']
+  templateUrl: './movie-add.component.html'
 })
 export class MovieAddComponent implements OnInit {
   searchKeyword: string;
-  @ViewChild('typeahead') typeahead: TypeaheadDirective;
-  suggestions: any;
   selectedMovie: Movie;
-  form: FormGroup;
-  constructor(private movieService: MovieService, private fb: FormBuilder, private router: Router) { }
+  suggestions: Observable<Movie[]>;
+  @ViewChild('typeahead') typeahead: TypeaheadDirective;
+  constructor(
+    private movieService: MovieService,
+    private toastrService: ToastrService,
+    public router: Router
+  ) { }
 
   ngOnInit(): void {
     this.bindAsyncSearch();
-    this.createForm();
   }
-
-  createForm(): void {
-    this.form = this.fb.group({
-      title: [{value:'', disabled: true}, Validators.required],
-      poster: [{value:'', disabled: true}],
-      score: [{value:'', disabled: false}],
-    });
-  }
-
 
   bindAsyncSearch(): any {
     this.suggestions = new Observable((observer: Observer<string | undefined>) => {
@@ -41,7 +33,7 @@ export class MovieAddComponent implements OnInit {
       switchMap((keyword: string) => {
         if (keyword) {
           return this.movieService.searchMovies(keyword).pipe(
-            map((data) => {if(data.Search) { return data.Search || []; } } ),
+            map((data) => { if (data.Search) { return data.Search || []; } }),
             tap(() => noop, err => {
               return of([]);
             })
@@ -54,11 +46,6 @@ export class MovieAddComponent implements OnInit {
 
   selectMovie(match: TypeaheadMatch): void {
     this.selectedMovie = match.item;
-    this.form.setValue({
-      title: this.selectedMovie.Title, 
-      poster: this.selectedMovie.Poster, 
-      score: ''
-    });
     this.setSearchKeyword(match.value);
   }
 
@@ -70,16 +57,18 @@ export class MovieAddComponent implements OnInit {
     this.typeahead.hide()
   }
 
-  submit(): void {
-    const movies = JSON.parse(localStorage.getItem('movies'));
-    const data = this.selectedMovie;
-    data['score'] = this.form.value.score;
-    if (movies !== null) {
-      movies.push(data);
-      localStorage.setItem('movies', JSON.stringify(movies));
-    } else {
-      localStorage.setItem('movies', JSON.stringify([data]));
-    }
-    this.router.navigate(['/list']);
+  submit(movie): void {
+    this.movieService.addMovie(movie).subscribe(
+      data => {
+        if (data) {
+          this.toastrService.success(this.selectedMovie.Title + ' filmi eklenmiştir');
+          this.router.navigate(['/list']);
+        } else {
+          this.toastrService.error('Bu film daha önceden listenize eklenmiştir');
+        }
+      }
+    )
+
+
   }
 }

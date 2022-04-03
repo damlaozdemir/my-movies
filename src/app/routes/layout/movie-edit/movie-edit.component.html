@@ -1,1 +1,7 @@
-<p>movie-edit works!</p>
+<div class="row justify-content-center m-2 mt-5 m-sm-5">
+    <div class="col-12 col-sm-6 mt-5">
+        <app-movie-form [movie]="movie" (submitEmitter)="submit($event)" [title]="'Filmi Düzenle'"></app-movie-form>
+        <button class="btn btn-secondary mt-3" (click)="router.navigate(['/link'])">Listeye Dön</button>
+    </div>
+</div>
+

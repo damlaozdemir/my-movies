@@ -1,0 +1,30 @@
+<div class="d-flex flex-column border p-3 rounded">
+    <div>
+        <p>{{title}}</p>
+    </div>
+    <div>
+        <form [formGroup]="form" (submit)="submit()">
+            <div class="form-group row">
+                <label class="col-12 col-sm-2" for="title">Adı:</label>
+                <input class="col-12 col-sm-10 form-control" type="text" id="title" formControlName="title">
+            </div>
+            <div class="form-group row">
+                <label class="col-12 col-sm-2" for="poster">Görseli: </label>
+                <input class="col-12 col-sm-10 form-control" type="text" id="poster" formControlName="poster">
+            </div>
+            <div class="form-group row">
+                <label class="col-12 col-sm-2" for="Score">Puanı: </label>
+                <div class="col-12 col-sm-10 p-0">
+                    <input class="form-control" type="text" id="score" formControlName="score"
+                        (keypress)="handleScore($event)" [maxlength]="2">
+                    <p class="text-danger" *ngIf="showScoreError">
+                        En fazla 10 puan verebilirsiniz
+                    </p>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <button class="btn btn-primary" [disabled]="!movie" type="submit">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>

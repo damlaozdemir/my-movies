@@ -1,18 +1,38 @@
 .movie-item
-    width: 200px
-    height: 300px
+    width: 100%
+    height: 100%
+    cursor: pointer
+    @media screen and (min-width: 768px) 
+        width: 250px
+        height: 350px
+    .backdrop 
+        background-color: black
+        width:100%
+        height: 100%
+        position: absolute
+        visibility: hidden
+        opacity: 0
+        transition: all 0.5s linear
     &:hover
-        transition: all 0.5s
-        -webkit-transition: all 0.5s
+        .backdrop 
+            visibility: visible
+            opacity: 0.7
         .movie-info
-            display: block!important
-.movie-info 
-    display: none!important
-.text-white 
-    color: #fff
-.text-yellow
-    color: #yellow
+            visibility: visible
+        + .delete-button
+            visibility: visible
+.movie-info
+    @media screen and (min-width: 991px) 
+        position: absolute
+        visibility: hidden
+        color: white
+
+.movie-score
+    font-size: 22px
+    @media screen and (min-width: 991px) 
+        color: yellow
 .delete-button
+    //visibility: hidden
     background-color: red
     border-radius: 50%
     width: 30px
@@ -24,3 +44,6 @@
     top: -10px
     right: -10px
     padding: 3px
+.c-pointer 
+    cursor: pointer
+

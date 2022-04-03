@@ -1,5 +1,5 @@
-<div class="d-flex p-5">
-    <div>
+<div class="row justify-content-center m-2 mt-5 m-sm-5">
+    <div class="col-12 col-sm-3 mt-5">
         <input [(ngModel)]="searchKeyword" [typeahead]="suggestions" typeaheadOptionField="Title"
             [typeaheadAsync]="true" class="form-control" placeholder="Ara" autocomplete="off" name="search"
             [typeaheadItemTemplate]="customItemTemplate" [typeaheadScrollable]="true"
@@ -9,33 +9,17 @@
         <ng-template #customItemTemplate let-model="item">
             <div class="d-flex align-items-center w-100">
                 <div>
-                    <img [src]="model.Poster" width="50">
+                    <img [src]="model.Poster !== 'N/A' ? model.Poster : 'assets/images/default-movie.png'" width="50">
                 </div>
-                <div class="content-overflow">
-                    {{ model.Title }}
+                <div class="d-flex flex-column">
+                    <div>{{ model.Title }}</div>
+                    <div>{{model.Year}}</div>
                 </div>
             </div>
         </ng-template>
     </div>
-    <div class="d-flex flex-column border p-3 rounded">
-        <p>Film Ekle</p>
-        <form class="form-group" [formGroup]="form" (submit)="submit()">
-            <div class="input-group">
-                <label for="title">Adı: </label>
-                <input class="ml-2 form-control" type="text" id="title" formControlName="title">
-            </div>
-            <div class="input-group mt-2">
-                <label for="poster">Görseli: </label>
-                <input class="ml-2 form-control" type="text" id="poster" formControlName="poster">
-            </div>
-            <div class="input-group mt-2">
-                <label for="Score">Puanı: </label>
-                <input class="ml-2 form-control" type="text" id="score" formControlName="score">
-            </div>
-            <div class="d-flex justify-content-end mt-2">
-                <button class="btn btn-primary" [disabled]="!selectedMovie" type="submit">Kaydet</button>
-            </div>
-        </form>
+    <div class="col-12 col-sm-6 mt-5">
+        <app-movie-form [movie]="selectedMovie" (submitEmitter)="submit($event)" [title]="'Film ekle'"></app-movie-form>
     </div>
-
 </div>
+<button class="btn btn-secondary" (click)="router.navigate(['/link'])">Listeye Dön</button>

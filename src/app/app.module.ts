@@ -10,6 +10,7 @@ import { LayoutModule } from '@routes/layout/layout.module';
 import { SharedModule } from '@shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieService } from './services/movie.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { MovieService } from './services/movie.service';
     LayoutModule,
     SharedModule
   ],
-  providers: [MovieService],
+  providers: [MovieService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

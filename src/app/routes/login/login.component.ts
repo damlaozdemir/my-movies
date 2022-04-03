@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { User } from '@model/user.model';
 import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
   passwordEyeClosed: boolean = true;
-  isLoading: boolean = false;
   constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -27,10 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    const user: User = {
-      username: this.form.value.username,
-      password: this.form.value.password
-    }
+    const user = new User(this.form.value.username, this.form.value.password);
     this.authService.login(user);
   }
 

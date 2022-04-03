@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout.component';
 import { MovieAddComponent } from './movie-add/movie-add.component';
 import { MovieEditComponent } from './movie-edit/movie-edit.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
+import { MovieFormComponent } from './movie-form/movie-form.component';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { MovieListComponent } from './movie-list/movie-list.component';
         LayoutComponent,
         MovieAddComponent,
         MovieEditComponent,
-        MovieListComponent
+        MovieListComponent,
+        MovieFormComponent
     ],
     exports: [
         LayoutComponent

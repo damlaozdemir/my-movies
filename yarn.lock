@@ -5618,12 +5618,33 @@ neo-async@^2.5.0, neo-async@^2.6.1, neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ng-lazyload-image@9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/ng-lazyload-image/-/ng-lazyload-image-9.1.0.tgz#2f887b85ef5829565a0fc875a66f568d7c3e2b32"
+  integrity sha512-ZdfCXMTaehfzxcSRRThpz9YZbEA+8LPA086Od6JiylrGj0yNM7Aq830A1x6NE/M8o2VuVq93emH9m8T6SFBHlA==
+  dependencies:
+    tslib "^2.0.0"
+
 ngx-bootstrap@7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-7.1.2.tgz#cf06a05cc22a74b882b45882a1f64f72ddece23d"
   integrity sha512-VsZwlGVM+qYOAdvEzzH3wqCjvj3yHec4n82Tho0ve6mhN1GTRu9WPrPmvxp3cFjIu8VQbREUeKPfK0ooO8U5eg==
   dependencies:
     tslib "^2.0.0"
+
+ngx-infinite-scroll@8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-infinite-scroll/-/ngx-infinite-scroll-8.0.1.tgz#95b9d7e51f8ed5ee6821889b4e4e3cfe8ddb5838"
+  integrity sha512-YpgkTPDNT7UCEp0GRX178V1nF+M2slCPJ2TX3CpvPZb5AR99JYwj/fNivcue5lN51oUaTySEG27qjVU73vKhjw==
+  dependencies:
+    opencollective-postinstall "^2.0.2"
+
+ngx-toastr@11.2.1:
+  version "11.2.1"
+  resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-11.2.1.tgz#130dcb416499f4419b18c39ad9cfea2e7790c7c4"
+  integrity sha512-qLZA+h1lIGLQ1HAJpx5JJ8i87PAZPAN6MnexmrWipSONqrK4fRh+nUKIxqmcckIiD16dgu2O5SNloSJymTKUAw==
+  dependencies:
+    tslib "^1.9.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -5917,6 +5938,11 @@ open@7.4.0:
   dependencies:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
+
+opencollective-postinstall@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
+  integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
 
 opn@^5.5.0:
   version "5.5.0"

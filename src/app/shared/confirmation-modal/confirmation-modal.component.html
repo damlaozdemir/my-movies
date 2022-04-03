@@ -1,0 +1,19 @@
+<ng-template #confirmationModal>
+    <div class="modal-header">
+        <div class="modal-title">{{ modalTitleText }}</div>
+        <button type="button" class="close" aria-label="Close" (click)="modalRef.hide();">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-message" [innerHTML]="modalBodyTextContent"></div>
+    </div>
+    <div class="modal-footer border-top-0">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-small btn-primary mr-2" type="button" (click)="modalRef.hide();">{{
+                modalDeclineText }}</button>
+            <button class="btn btn-small btn-secondary" type="button" (click)="submit();modalRef.hide();">{{
+                modalAcceptText }}</button>
+        </div>
+    </div>
+</ng-template>

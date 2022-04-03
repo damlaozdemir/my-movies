@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '@model/user.model';
+import { ConfirmationModalComponent } from '@shared/confirmation-modal/confirmation-modal.component';
 import { AuthService } from 'app/services/auth.service';
+import { UserService } from 'app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +13,33 @@ import { AuthService } from 'app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   loggedIn: boolean;
-  constructor(private authService: AuthService, public router: Router) { }
+  user: User;
+  @ViewChild(ConfirmationModalComponent) confirmationModalComponent: ConfirmationModalComponent;
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private toastrService: ToastrService,
+    public router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
+  logout(): void {
+    this.authService.logout();
+  }
+
+  deleteAccount(): void {
+    this.userService.deleteUser().subscribe(
+      data => {
+        this.toastrService.success('Hesabınız başarıyla silindi');
+        this.logout();
+      }
+    )
+  }
+
+  openConfirmationModal(): void {
+    this.confirmationModalComponent.openModal();
+  }
 }

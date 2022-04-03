@@ -5,4 +5,5 @@ export interface Movie {
     Year: string;
     imdbID: string;
     score?: number;
+    date?: Date;
 }
