@@ -24,7 +24,7 @@
         <ng-template #movieList>
             <div class="d-flex flex-wrap flex-column flex-md-row" infiniteScroll
                 (scrolled)="onScrollDown()">
-                <div *ngFor="let movie of movies | filter : searchText" class="m-2 border rounded position-relative"
+                <div *ngFor="let movie of movies | filter : searchText" class="m-2 border rounded position-relative movie"
                     (click)="router.navigate(['/edit/' + movie.imdbID])">
                     <div
                         class="d-flex flex-column flex-lg-row align-items-center justify-content-center overflow-hidden movie-item position-relative">
