@@ -4,7 +4,7 @@ import { Movie } from '@model/movie.model';
 import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
 import { MovieService } from 'app/services/movie.service';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, merge, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-movie-list',
@@ -13,9 +13,11 @@ import { Observable, merge, of } from 'rxjs';
 })
 export class MovieListComponent implements OnInit {
   searchText: string = '';
-  count: number = 10;
+  offset: number = 0;
+  limit: number = 10;
   selectedMovie: Movie;
   imageLoadOffset: Observable<number>;
+  totalCount: number;
   movies: Movie[] = [];
   loggedInUserMoviesAll: Movie[] = [];
   @ViewChild(ConfirmationModalComponent) confirmationModalComponent: ConfirmationModalComponent;
@@ -28,12 +30,15 @@ export class MovieListComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getMovies();
+    this.getMovies(this.offset, this.limit);
   }
 
-  getMovies(): void {
-    this.movieService.getMovies().subscribe(
-      data => this.movies.push(...data.reverse().slice(this.count-10, this.count))
+  getMovies(offset: number, limit: number): void {
+    this.movieService.getMovies(offset, offset + limit).subscribe(
+      data => {
+        this.totalCount = data.totalCount;
+        this.movies.push(...data.movies);
+      }
     )
   }
 
@@ -50,7 +55,8 @@ export class MovieListComponent implements OnInit {
     this.movieService.deleteMovie(this.selectedMovie.imdbID).subscribe(
       data => {
         this.toastrService.success(this.selectedMovie.Title + ' adlı film silindi');
-        this.getMovies();
+        this.movies = this.movies.filter(movie => movie.imdbID !== this.selectedMovie.imdbID);
+        this.getMovies(this.offset + this.limit - 1, 1);
       }
     )
   }
@@ -73,7 +79,7 @@ export class MovieListComponent implements OnInit {
   }
 
   onScrollDown() {
-    this.count += 10;
-    this.getMovies();
+    this.offset += 10;
+    this.getMovies(this.offset, this.offset + this.limit);
   }
 }

@@ -14,10 +14,15 @@ export class MovieService {
       return this.httpClient.get("http://www.omdbapi.com/?apikey=69ea7f60&type=movie" + "&r=" + "json" + "&s=" + keyword);
   }
 
-  getMovies(): Observable<Movie[]> {
+  getMovies(start: number, end: number): Observable<any> {
     const currentUser: User = JSON.parse(localStorage.getItem('user'));
     const allUsers: User[] = JSON.parse(localStorage.getItem('users'));
-    return of(allUsers.filter(user => user.username === currentUser.username)[0].movies);
+    const allMovies = allUsers.filter(user => user.username === currentUser.username)[0].movies;
+    const data = {
+      movies: allMovies.reverse().slice(start,end),
+      totalCount: allMovies.length
+    }
+    return of(data);
   }
 
   deleteMovie(id: string): Observable<boolean> {
