@@ -1,7 +1,7 @@
 <app-header></app-header>
 
-<div class="d-flex justify-content-center mt-5">
-    <div class="mt-5">
+<div class="d-flex justify-content-center align-items-center height-100vh">
+    <div>
         <form [formGroup]="form" (submit)="submit()">
             <div class="form-group d-flex flex-column">
                 <div>
@@ -19,7 +19,7 @@
                         [ngClass]="{ error: form.controls['password'].invalid && form.controls['password'].touched }"
                         class="form-control" placeholder="Şifre" autocomplete="off" required>
                     <div class="input-group-append">
-                        <span class="input-group-text pr-0"
+                        <span class="input-group-text"
                             [ngClass]="{ error: form.controls['password'].invalid && form.controls['password'].touched }">
                             <div (click)="togglePassword()">
                                 <ng-container *ngIf="passwordEyeClosed; else passwordIconEye">
@@ -37,7 +37,7 @@
                 </ng-container>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Giriş</button>
+                <button class="btn btn-primary btn-block" type="submit" [disabled]="!form.valid">Giriş</button>
             </div>
         </form>
     </div>
