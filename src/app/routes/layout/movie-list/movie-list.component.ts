@@ -33,7 +33,7 @@ export class MovieListComponent implements OnInit {
 
   getMovies(): void {
     this.movieService.getMovies().subscribe(
-      data => this.movies = data.reverse().slice(0, this.count)
+      data => this.movies.push(...data.reverse().slice(this.count-10, this.count))
     )
   }
 
