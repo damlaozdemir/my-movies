@@ -4,6 +4,7 @@ import { Movie } from '@model/movie.model';
 import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
 import { MovieService } from 'app/services/movie.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable, merge, of } from 'rxjs';
 
 @Component({
   selector: 'app-movie-list',
@@ -14,6 +15,7 @@ export class MovieListComponent implements OnInit {
   searchText: string = '';
   count: number = 10;
   selectedMovie: Movie;
+  imageLoadOffset: Observable<number>;
   movies: Movie[] = [];
   loggedInUserMoviesAll: Movie[] = [];
   @ViewChild(ConfirmationModalComponent) confirmationModalComponent: ConfirmationModalComponent;
@@ -21,7 +23,9 @@ export class MovieListComponent implements OnInit {
     private toastrService: ToastrService,
     private movieService: MovieService,
     public router: Router
-  ) { }
+  ) {
+    this.imageLoadOffset = of(800);
+   }
 
   ngOnInit(): void {
     this.getMovies();

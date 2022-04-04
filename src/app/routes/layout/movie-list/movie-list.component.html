@@ -30,7 +30,7 @@
                         class="d-flex flex-column flex-lg-row align-items-center justify-content-center overflow-hidden movie-item position-relative">
                         <div class="backdrop"></div>
                         <img height="auto" width="100%"
-                            [lazyLoad]="movie.Poster.replace('X300', 'X200') + ' 200w' + ',' + movie.Poster + ' 300w'"
+                            [lazyLoad]="movie.Poster.replace('X300', 'X200') + ' 200w' + ',' + movie.Poster + ' 300w'"  [offset]="imageLoadOffset | async"
                             [useSrcset]="true" [defaultImage]="'assets/images/default-movie.png'">
                         <div class="d-flex flex-column text-center movie-info">
                             <div>{{movie.Title}}</div>
