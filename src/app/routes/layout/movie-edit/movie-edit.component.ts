@@ -38,6 +38,9 @@ export class MovieEditComponent {
         } else {
           this.toastrService.success('Sistemsel bir hata oluştu');
         }
+      },
+      error => {
+        // Error handling
       }
     );
   }

@@ -38,6 +38,9 @@ export class MovieListComponent implements OnInit {
       data => {
         this.totalCount = data.totalCount;
         this.movies.push(...data.movies);
+      },
+      error => {
+        // Error handling
       }
     )
   }
@@ -57,6 +60,9 @@ export class MovieListComponent implements OnInit {
         this.toastrService.success(this.selectedMovie.Title + ' adlı film silindi');
         this.movies = this.movies.filter(movie => movie.imdbID !== this.selectedMovie.imdbID);
         this.getMovies(this.offset + this.limit - 1, 1);
+      },
+      error => {
+        // Error handling
       }
     )
   }

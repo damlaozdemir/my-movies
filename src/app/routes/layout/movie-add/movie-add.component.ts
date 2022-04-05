@@ -66,9 +66,10 @@ export class MovieAddComponent implements OnInit {
         } else {
           this.toastrService.error('Bu film daha önceden listenize eklenmiştir');
         }
+      },
+      error => {
+        // Error handling
       }
     )
-
-
   }
 }

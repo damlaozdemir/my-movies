@@ -5,7 +5,6 @@
             Hoşgeldin, {{user.username}}
         </span>
     </div>
-    
     <div class="mt-2 mt-md-0" *ngIf="user">
         <button class="btn btn-secondary ml-3" (click)="openConfirmationModal()">Hesabı Sil</button>
         <button class="btn btn-primary ml-3" (click)="router.navigate(['/add']);">Film ekle</button>
