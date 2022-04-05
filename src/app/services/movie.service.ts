@@ -4,22 +4,23 @@ import { Observable, of } from 'rxjs';
 import { Movie } from '@model/movie.model';
 import { User } from '@model/user.model';
 @Injectable()
-export class MovieService {
+export class MovieService { // In real life apps it should make api calls and returns response as observable
+                            // Now the services are responsible for making localstorage changes and return response as observable according to it
   constructor(
     private httpClient: HttpClient
   ) {
   }
 
   searchMovies(keyword: string): Observable<any> {
-      return this.httpClient.get("http://www.omdbapi.com/?apikey=69ea7f60&type=movie" + "&r=" + "json" + "&s=" + keyword);
+    return this.httpClient.get("http://www.omdbapi.com/?apikey=69ea7f60&type=movie" + "&r=" + "json" + "&s=" + keyword);
   }
 
-  getMovies(start: number, end: number): Observable<any> {
+  getMovies(start: number, end: number): Observable<any> { 
     const currentUser: User = JSON.parse(localStorage.getItem('user'));
     const allUsers: User[] = JSON.parse(localStorage.getItem('users'));
     const allMovies = allUsers.filter(user => user.username === currentUser.username)[0].movies;
     const data = {
-      movies: allMovies.reverse().slice(start,end),
+      movies: allMovies.reverse().slice(start, end),
       totalCount: allMovies.length
     }
     return of(data);
@@ -35,7 +36,7 @@ export class MovieService {
         break;
       }
     }
-    return of(true);    
+    return of(true);
   }
 
   getMovieDetail(id: string): Observable<Movie> {
@@ -60,7 +61,7 @@ export class MovieService {
         break;
       }
     }
-    return of(true);   
+    return of(true);
   }
 
   editMovie(movie): Observable<boolean> {
@@ -80,6 +81,6 @@ export class MovieService {
         break;
       }
     }
-    return of(true);   
+    return of(true);
   }
 }

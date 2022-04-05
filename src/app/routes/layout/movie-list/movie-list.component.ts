@@ -27,7 +27,7 @@ export class MovieListComponent implements OnInit {
     public router: Router
   ) {
     this.imageLoadOffset = of(800);
-   }
+  }
 
   ngOnInit(): void {
     this.getMovies(this.offset, this.limit);

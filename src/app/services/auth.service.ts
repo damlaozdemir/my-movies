@@ -6,7 +6,6 @@ import { UserService } from './user.service';
 
 @Injectable()
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(
     private router: Router,
@@ -17,18 +16,12 @@ export class AuthService {
     if (user.username !== '' && user.password !== '') {
       this.userService.addUser(user)
       localStorage.setItem('user', JSON.stringify(user));
-      this.loggedIn.next(true);
       this.router.navigate(['/list']);
     }
   }
 
-  logout() {  //Bu metod tüm localstorageı temizlemeli fakat film listesi sıfırlanmasın diye movie yi sildirtmedim.       
-    this.loggedIn.next(false);
+  logout() {  
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
-  }
-
-  isLoggedIn() {
-    return this.loggedIn.asObservable();
   }
 }
